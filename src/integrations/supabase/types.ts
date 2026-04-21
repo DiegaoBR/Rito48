@@ -14,7 +14,101 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      offers: {
+        Row: {
+          affiliate_link: string
+          category: string | null
+          created_at: string
+          id: string
+          image_url: string | null
+          original_price: number
+          promo_price: number
+          status: string
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          affiliate_link: string
+          category?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          original_price: number
+          promo_price: number
+          status?: string
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          affiliate_link?: string
+          category?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          original_price?: number
+          promo_price?: number
+          status?: string
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      scheduled_sends: {
+        Row: {
+          created_at: string
+          id: string
+          offer_id: string
+          scheduled_at: string
+          sent_at: string | null
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          offer_id: string
+          scheduled_at: string
+          sent_at?: string | null
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          offer_id?: string
+          scheduled_at?: string
+          sent_at?: string | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "scheduled_sends_offer_id_fkey"
+            columns: ["offer_id"]
+            isOneToOne: false
+            referencedRelation: "offers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      settings: {
+        Row: {
+          auto_send: boolean
+          id: number
+          telegram_chat_id: string | null
+          updated_at: string
+        }
+        Insert: {
+          auto_send?: boolean
+          id: number
+          telegram_chat_id?: string | null
+          updated_at?: string
+        }
+        Update: {
+          auto_send?: boolean
+          id?: number
+          telegram_chat_id?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
